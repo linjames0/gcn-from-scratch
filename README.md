@@ -1,7 +1,7 @@
 # Graph Convolutional Networks From Scratch
 My attempt at building the gears of a graph convolutional network (GCN) from the ground up.
 
-Through the process, [Jonathan Hui's blog post]([url](https://jonathan-hui.medium.com/graph-convolutional-networks-gcn-pooling-839184205692)) and [Inneke Mayachita's explainer]([url](https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b)) were the gold-standards from which I learned.
+Through the process, [Jonathan Hui's blog post](https://jonathan-hui.medium.com/graph-convolutional-networks-gcn-pooling-839184205692) and [Inneke Mayachita's explainer](https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b) were the gold-standards from which I learned.
 
 **This is not meant to be a zero-to-one primer. This is moreso my notes on GCNs, condensed into an explainer for my own comprehension (Feynman Technique).**
 
@@ -12,7 +12,7 @@ Just like the analogous convolutional networks, there are a few core classes and
 
 Graph networks require a graph structure as input. Adjacency matrices are convenient ways to represent graph information. Cells with a '1' represent connections between nodes, '0' means there's no connection. In the image, Node 0 shares an edge with Node 1, 2, and 3.
 
-<img width="300" alt="Screenshot 2024-03-30 at 10 46 55 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/5f5feb62-ac3d-4bc7-8775-29e0c0821a47">
+<img width="400" alt="Screenshot 2024-03-30 at 10 46 55 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/5f5feb62-ac3d-4bc7-8775-29e0c0821a47">
 
 Edge indices are also convenient representations of matrices. Edge indices are a list of node-node connections, e.g. [[1,0], [2,0], [2,3]] is a graph where Node 0 shares an edge with Node 1 and 2, and Node 2 and 3 also share an edge.
 
@@ -62,9 +62,9 @@ Comparing against the same mat mul as before, you can see that now the product i
 
 <img width="400" alt="Screenshot 2024-03-30 at 11 07 19 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/cf44323b-1e4c-4627-833b-4de9641392f2">
 
-Without diving into too much of the math (you can do that [here]([url](https://arxiv.org/pdf/1609.02907.pdf))), Kipf and Welling showed that the ideal normalization actually takes on a symmetric form.
+Without diving into too much of the math (you can do that [here](https://arxiv.org/pdf/1609.02907.pdf)), Kipf and Welling showed that the ideal normalization actually takes on a symmetric form.
 
-<img width="456" alt="Screenshot 2024-03-30 at 11 08 12 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/492abb4e-c1d2-4f23-9ed3-845ca9943208">
+<img width="400" alt="Screenshot 2024-03-30 at 11 08 12 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/492abb4e-c1d2-4f23-9ed3-845ca9943208">
 
 Now the output is:
 
@@ -82,7 +82,7 @@ Where D is the degree matrix, A is the adjacency matrix with self-loops, H^l is 
 
 ## Results
 
-I trained a model on [Zachary's Karate Club]([url](http://konect.cc/networks/ucidata-zachary/)), a classic graph of 34 people involved in a karate club. The model was evaluated on a binary classification task, determining whether a club member would join Mr. Hi's club (red) or the Administrator's (blue). Node 0 represents Mr. Hi, Node 34 represents the Administrator, and the connections of a given club member to other people is what determines their loyalty.
+I trained a model on [Zachary's Karate Club](http://konect.cc/networks/ucidata-zachary/), a classic graph of 34 people involved in a karate club. The model was evaluated on a binary classification task, determining whether a club member would join Mr. Hi's club (red) or the Administrator's (blue). Node 0 represents Mr. Hi, Node 34 represents the Administrator, and the connections of a given club member to other people is what determines their loyalty.
 
 <img width="631" alt="Screenshot 2024-03-30 at 11 26 38 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/19aa586f-ac60-430a-9578-6e819f2d3916">
 
@@ -100,4 +100,4 @@ There's a clear clustering based on each node's learned embeddings as the model 
 
 ## Conclusion
 
-That's all for now. Thanks for reading if you made it this far! If you want to learn more, I highly recommend this [Graph Neural Network Primer]([url](https://distill.pub/2021/gnn-intro/)) in addition to both posts I mentioned above ([Jonathan]([url](https://jonathan-hui.medium.com/graph-convolutional-networks-gcn-pooling-839184205692)), [Inneke]([url](https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b)))
+That's all for now. Thanks for reading if you made it this far! If you want to learn more, I highly recommend this [Graph Neural Network Primer](https://distill.pub/2021/gnn-intro/) in addition to both posts I mentioned above ([Jonathan](https://jonathan-hui.medium.com/graph-convolutional-networks-gcn-pooling-839184205692), [Inneke](https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b))
