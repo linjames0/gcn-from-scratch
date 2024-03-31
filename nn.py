@@ -2,13 +2,13 @@
 import torch.nn as nn
 import torch
 
-class Node(nn.Module):
-    def __init__(self, num_nodes, dim_features, idx):
-        super(Node, self).__init__()
-        self.num_nodes = num_nodes
-        self.dim_features = dim_features
-        self.idx = idx
-    
+class NodeEmbeddings(nn.Module):
+    def __init__(self, num_nodes, embedding_dim):
+        super(NodeEmbeddings, self).__init__()
+        self.embedding = nn.Embedding(num_nodes, embedding_dim)
+
+    def forward(self):
+        return self.embedding.weight
 
 class GCNLayer(nn.Module):
     def __init__(self, nin, nout):
@@ -40,13 +40,15 @@ class GCNLayer(nn.Module):
         return H
     
 class GCN(nn.Module):
-    def __init__(self, nin, nout, nhid, nclass):
+    def __init__(self, nin, nout, nhid, nclass, num_nodes):
         super(GCN, self).__init__()
+        self.features = NodeEmbeddings(num_nodes, nin)
         self.layer1 = GCNLayer(nin, nhid)
         self.layer2 = GCNLayer(nhid, nout)
         self.linear = nn.Linear(nout, nclass)
 
-    def forward(self, H0, adj_matrix):
+    def forward(self, adj_matrix):
+        H0 = self.features()
         H1 = self.layer1(H0, adj_matrix)
         H2 = self.layer2(H1, adj_matrix)
         H3 = self.linear(H2)
