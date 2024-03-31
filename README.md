@@ -80,6 +80,24 @@ Putting everything together, performing the single layer of convolution across t
 
 Where D is the degree matrix, A is the adjacency matrix with self-loops, H^l is feature matrix at layer l (H^0 is just X, the initial feature matrix), and W^l is the weight matrix of the neural network layer that processes the result of DADX.
 
+## Results
+
+I trained a model on [Zachary's Karate Club]([url](http://konect.cc/networks/ucidata-zachary/)), a classic graph of 34 people involved in a karate club. The model was evaluated on a binary classification task, determining whether a club member would join Mr. Hi's club (red) or the Administrator's (blue). Node 0 represents Mr. Hi, Node 34 represents the Administrator, and the connections of a given club member to other people is what determines their loyalty.
+
+<img width="631" alt="Screenshot 2024-03-30 at 11 26 38 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/19aa586f-ac60-430a-9578-6e819f2d3916">
+
+The loss was evaluated via cross entropy between the ground truth labels and probabilities for the binary classification.
+
+**Before training:**
+
+<img width="400" alt="Screenshot 2024-03-30 at 11 21 52 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/ebc37d1e-6630-447d-bd6c-17489986c3b3">
+
+**After training:**
+
+<img width="400" alt="Screenshot 2024-03-30 at 11 30 07 PM" src="https://github.com/linjames0/gnn-from-scratch/assets/78285353/5804772c-b3b5-411b-b283-a2b1dd48d4e1">
+
+There's a clear clustering based on each node's learned embeddings as the model trained, which shows that the model effectively learned at this binary classification task.
+
 ## Conclusion
 
 That's all for now. Thanks for reading if you made it this far! If you want to learn more, I highly recommend this [Graph Neural Network Primer]([url](https://distill.pub/2021/gnn-intro/)) in addition to both posts I mentioned above ([Jonathan]([url](https://jonathan-hui.medium.com/graph-convolutional-networks-gcn-pooling-839184205692)), [Inneke]([url](https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b)))
